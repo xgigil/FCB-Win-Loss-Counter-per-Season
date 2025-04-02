@@ -80,6 +80,46 @@ function updateSavedEntries() {
     });
 }
 
+function save() {
+    let name = nameInput.value.trim()
+    if (name === "") {
+        alert("Please indicate the season before saving")
+        return
+    }
+
+    let ratio = countLost === 0 ? "100%" : (countWon / (countWon + countLost) * 100).toFixed(2) + "%";
+    let countStr = `${name}: Wins - ${countWon}, Losses - ${countLost}, Ratio - ${ratio}`
+
+    const existingEntryIndex = savedEntries.findIndex(entry => entry.includes(name))
+
+    if (existingEntryIndex !== -1) {
+        let existingEntry = savedEntries[existingEntryIndex];
+        let existingWins = parseInt(existingEntry.split('Wins - ')[1].split(',')[0])
+        let existingLosses = parseInt(existingEntry.split('Losses - ')[1].split(',')[0])
+
+        if (existingWins !== countWon || existingLosses !== countLost) {
+            savedEntries[existingEntryIndex] = countStr
+            console.log(`Updated: ${countStr}`)
+        } else {
+            console.log(`No update needed for season "${name}" (Win/Losses are the same).`)
+        }
+    } else {
+        savedEntries.push(countStr)
+        console.log(`Saved: ${countStr}`)
+    }
+    updateSavedEntries()
+}
+
+function updateSavedEntries() {
+    saveEl.innerHTML = ""
+    savedEntries.forEach(entry => {
+        let p = document.createElement("p")
+        p.textContent = entry
+        saveEl.appendChild(p)
+    })
+}
+
+
 function deleteEntryByName() {
     let nameToDelete = prompt("Enter the season name to delete:");
     if (nameToDelete) {
