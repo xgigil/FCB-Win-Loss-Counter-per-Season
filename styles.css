@@ -112,6 +112,13 @@ button:hover {
     margin: 30px auto;
 }
 
+.entries_top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
 #entries_font {
     font-size: 35px;
 }
@@ -131,9 +138,14 @@ button:hover {
     background: rgba(237, 187, 0, 1);
 }
 
+#sort-btn {
+    background: rgba(237, 187, 0, 1);
+    width: 50px;
+}
 footer {
     text-align: center;
     padding: 20px;
     color: #fff;
     background-color: rgb(24, 23, 51);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
