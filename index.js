@@ -48,43 +48,6 @@
         let name = nameInput.value.trim()
         if (name === "") {
             alert("Please indicate the season before saving")
-            return;
-        }
-
-        let countStr = `${name}: Wins - ${countWon}, Losses - ${countLost}`
-
-        const existingEntryIndex = savedEntries.findIndex(entry => entry.includes(name))
-
-        if (existingEntryIndex !== -1) {
-            let existingEntry = savedEntries[existingEntryIndex]
-            let existingWins = parseInt(existingEntry.split('Wins - ')[1].split(',')[0])
-            let existingLosses = parseInt(existingEntry.split('Losses - ')[1])
-
-            if (existingWins !== countWon || existingLosses !== countLost) {
-                savedEntries[existingEntryIndex] = countStr
-                console.log(`Updated: ${countStr}`)
-            } else {
-                console.log(`No update needed for season "${name}" (Win/Losses are the same).`)
-            }
-        } else {
-            savedEntries.push(countStr)
-            console.log(`Saved: ${countStr}`)
-        }
-        updateSavedEntries()
-    }
-    function updateSavedEntries() {
-        saveEl.innerHTML = ""
-        savedEntries.forEach(entry => {
-            let p = document.createElement("p")
-            p.textContent = entry
-            saveEl.appendChild(p)
-        });
-    }
-
-    function save() {
-        let name = nameInput.value.trim()
-        if (name === "") {
-            alert("Please indicate the season before saving")
             return
         }
 
